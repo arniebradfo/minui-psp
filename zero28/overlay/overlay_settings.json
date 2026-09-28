@@ -2,7 +2,6 @@
   "emulator": "ppsspp",
   "config_file": "ppsspp.ini",
   "config_section": "Graphics",
-  "options_hint": "Some changes need game restart",
   "save_state": true,
   "load_state": true,
   "sections": [
