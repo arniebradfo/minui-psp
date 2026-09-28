@@ -114,8 +114,9 @@ set_cpu_settings() {
 # Start=9 L3=10 R3=11 d-pad 13-16 Menu=19, sticks on axes 0/1 and 2/3. The face
 # buttons are mapped by position, not label: PPSSPP puts Cross on SDL A, so the
 # bottom button (B) is Cross and the right one (A) is Circle, as on a PSP. Menu
-# is SDL's guide button, which PPSSPP opens its pause menu with. The GUID comes
-# from sysfs so it matches whatever the kernel reports.
+# is SDL's guide button: in-game the overlay takes it (setup_zero28_overlay),
+# and in PPSSPP's own menus it goes back. The GUID comes from sysfs so it
+# matches whatever the kernel reports.
 zero28_gamecontroller_map() {
     guid="1900000012b400006666000000010000"
     for dev in /sys/class/input/event*/device; do
