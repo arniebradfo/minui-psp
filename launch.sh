@@ -135,9 +135,9 @@ zero28_gamecontroller_map() {
 # go where minarch keeps its own.
 setup_zero28_overlay() {
     rom="$1"
-    export EMU_OVERLAY_JSON="$PAK_DIR/overlay/overlay_settings.json"
+    export EMU_OVERLAY_JSON="$PAK_DIR/zero28/overlay/overlay_settings.json"
     export EMU_OVERLAY_INI="$PPSSPP_INI"
-    export EMU_OVERLAY_RES="$PAK_DIR/overlay/res"
+    export EMU_OVERLAY_RES="$PAK_DIR/zero28/overlay/res"
     export EMU_OVERLAY_FONT="$SDCARD_PATH/.system/res/BPreplayBold-unhinted.otf"
     export EMU_OVERLAY_GAME="$(basename "$rom" | sed 's/\.[^.]*$//')"
     export EMU_OVERLAY_ROMFILE="$(basename "$rom")"
