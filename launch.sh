@@ -127,6 +127,29 @@ zero28_gamecontroller_map() {
     echo "$guid,magicx-input,a:b1,b:b0,x:b3,y:b2,leftshoulder:b4,rightshoulder:b5,lefttrigger:b6,righttrigger:b7,back:b8,start:b9,leftstick:b10,rightstick:b11,dpup:b13,dpleft:b14,dpright:b15,dpdown:b16,guide:b19,leftx:a0,lefty:a1,rightx:a2,righty:a3,platform:Linux,"
 }
 
+# The MinUI-style in-game menu built into PPSSPPSDL_zero28 (nx-redux's
+# overlay): MENU opens Continue / Save / Load / Options / PPSSPP Menu / Quit.
+# It draws with MinUI's own font, reads the pad by the numbers in EMU_PAD (the
+# same format as N64.pak), and turns with the display. Save state screenshots
+# go where minarch keeps its own.
+setup_zero28_overlay() {
+    rom="$1"
+    export EMU_OVERLAY_JSON="$PAK_DIR/overlay/overlay_settings.json"
+    export EMU_OVERLAY_INI="$PPSSPP_INI"
+    export EMU_OVERLAY_RES="$PAK_DIR/overlay/res"
+    export EMU_OVERLAY_FONT="$SDCARD_PATH/.system/res/BPreplayBold-unhinted.otf"
+    export EMU_OVERLAY_GAME="$(basename "$rom" | sed 's/\.[^.]*$//')"
+    export EMU_OVERLAY_ROMFILE="$(basename "$rom")"
+    export EMU_OVERLAY_SCREENSHOT_DIR="$SHARED_USERDATA_PATH/.minui/PSP"
+    export EMU_OVERLAY_ROTATE="$DISPLAY_ROTATION"
+    export EMU_OVERLAY_HOST_MENU="PPSSPP Menu"
+    export EMU_PAD="a=0,b=1,l1=4,r1=5,menu=19,up=13,down=16,left=14,right=15"
+    mkdir -p "$EMU_OVERLAY_SCREENSHOT_DIR"
+    if [ ! -f "$EMU_OVERLAY_FONT" ]; then
+        echo "Overlay font $EMU_OVERLAY_FONT not found"
+    fi
+}
+
 main() {
     echo "1" >/tmp/stay_awake
     trap "cleanup" EXIT INT TERM HUP QUIT
@@ -170,6 +193,7 @@ main() {
         export SDL_GAMECONTROLLERCONFIG
         echo "DISPLAY_ROTATION=$DISPLAY_ROTATION"
         echo "SDL_GAMECONTROLLERCONFIG=$SDL_GAMECONTROLLERCONFIG"
+        setup_zero28_overlay "$1"
         # PPSSPP lays its menus out for about 1000x700 and they overlap at 640x480.
         # Scale them to 2^(-4/8) = 0.71x once; after that the UI size setting
         # in PPSSPP's own menu is the user's.
