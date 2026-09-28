@@ -62,6 +62,13 @@ The Zero 28 has the same Allwinner A133P and PowerVR GE8300 as the Trimui Brick 
 - **Volume:** opening the audio device leaves the Zero 28's codec at full volume, so `launch.sh` has MinUI's `syncsettings.elf` restore your volume a few seconds after launch.
 - **Save state screenshots** go to `/.userdata/shared/.minui/PSP/`, where MinUI's own emulators keep theirs.
 
+Related pull requests (each links the others, so this code stays findable whichever is merged or declined):
+
+- [ben16w/minui-psp#88](https://github.com/ben16w/minui-psp/pull/88): Zero 28 support in the MinUI PSP pak
+- [ben16w/PPSSPP-spruce#3](https://github.com/ben16w/PPSSPP-spruce/pull/3): display rotation and the in-game menu in the PowerVR build
+- [spruceUI/PPSSPP-spruce#5](https://github.com/spruceUI/PPSSPP-spruce/pull/5): only the rotation fix
+- [ryanmsartor/Mini-Zero-28-Custom-MinUI-Paks#4](https://github.com/ryanmsartor/Mini-Zero-28-Custom-MinUI-Paks/pull/4): a ready-built PSP.pak for the Zero 28, built from these
+
 ## Skip Buffer Effects
 
 This option can be found under Settings > Graphics > Speed Hacks > Skip buffer effects. Use it as a last‑resort speed boost for demanding games. It can break transparency/lighting or even cause black screens. It's best to toggle it per game as needed.
